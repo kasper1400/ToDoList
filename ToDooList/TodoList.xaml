@@ -53,6 +53,7 @@
               <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
                 <Label Text="{Binding Name}"  />
                 <Label Text="{Binding Price}"  />
+                  <!--synctest-->
               </StackLayout>
             </StackLayout>
           </ViewCell>

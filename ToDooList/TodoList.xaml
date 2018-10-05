@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 	xmlns="http://xamarin.com/schemas/2014/forms" 
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+				x:Class="ToDooList.TodoList"
+				Title="ToDoList">
+  <Grid RowSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <ActivityIndicator Grid.RowSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="False"
+                       IsEnabled="True"
+                       x:Name="syncIndicator"/>
+    <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
+      <Label TextColor="#ffffff" Text="ToDoList" />
+            <Button x:Name="loginButton" Text="Kirjaudu" MinimumHeightRequest="30"
+                    Clicked="LoginButton_Clicked"/>
+            <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+                <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0" MinimumHeightRequest="40"/>
+                <Entry x:Name="newItemName" PlaceholderColor="#ffffff" Grid.Column="0" Grid.Row="0" MinimumHeightRequest="40"
+                  Placeholder="..." />
+
+                <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0" MinimumHeightRequest="40"/>
+                <Entry x:Name="newItemPrice" PlaceholderColor="#ffffff" Grid.Column="2" Grid.Row="0" MinimumHeightRequest="40"
+                  Placeholder=".." />
+
+                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+          <Button Text="+"
+                  MinimumHeightRequest="30"
+                  Clicked="OnAdd" />
+
+                </StackLayout>
+      </Grid>
+    </StackLayout>
+    <ListView x:Name="todoList"
+				ItemSelected="OnSelected"
+				IsPullToRefreshEnabled="true" Refreshing="OnRefresh"
+				Grid.Row="1">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Clicked="OnComplete" Text="Poista listasta" CommandParameter="{Binding .}"/>
+            </ViewCell.ContextActions>
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
+              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                <Label Text="{Binding Name}"  />
+                <Label Text="{Binding Price}"  />
+              </StackLayout>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</ContentPage>

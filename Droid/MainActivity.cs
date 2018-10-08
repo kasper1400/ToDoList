@@ -56,7 +56,7 @@ namespace ToDooList.Droid
                     MobileServiceAuthenticationProvider.Google, "todoolist");
                 if (user != null)
                 {
-                    message = string.Format("you are now signed-in as {0}.",
+                    message = string.Format("Kirjautuminen onnistui, SID: {0}.",
                         user.UserId);
                     success = true;
                 }
@@ -69,7 +69,7 @@ namespace ToDooList.Droid
             // Display the success or failure message.
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.SetMessage(message);
-            builder.SetTitle("Sign-in result");
+            builder.SetTitle("Kirjautumisen tila:");
             builder.Create().Show();
 
             return success;

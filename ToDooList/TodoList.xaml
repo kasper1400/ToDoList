@@ -47,13 +47,12 @@
         <DataTemplate>
           <ViewCell>
             <ViewCell.ContextActions>
-              <MenuItem Clicked="OnComplete" Text="Poista listasta" CommandParameter="{Binding .}"/>
+              <MenuItem Clicked="OnComplete" Text="Merkitse valmiiksi" CommandParameter="{Binding .}"/>
             </ViewCell.ContextActions>
             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
               <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
                 <Label Text="{Binding Name}"  />
                 <Label Text="{Binding Price}"  />
-                  <!--synctest-->
               </StackLayout>
             </StackLayout>
           </ViewCell>

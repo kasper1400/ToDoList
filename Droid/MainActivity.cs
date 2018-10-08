@@ -69,7 +69,7 @@ namespace ToDooList.Droid
             // Display the success or failure message.
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.SetMessage(message);
-            builder.SetTitle("Kirjautumisen tila:");
+            builder.SetTitle("Kirjautumisen tila");
             builder.Create().Show();
 
             return success;

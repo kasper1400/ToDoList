@@ -4,18 +4,20 @@ using Xamarin.Forms;
 
 namespace ToDooList
 {
-    public partial class TodoList : ContentPage
+    public partial class Parent : ContentPage
     {
         TodoItemManager manager;
 
         // Track whether the user has authenticated.
-        bool authenticated = false;
+        bool authenticated = true;
 
-        public TodoList()
+
+        public Parent()
         {
-            InitializeComponent();
+           InitializeComponent();
 
-            manager = TodoItemManager.DefaultManager;
+        manager = TodoItemManager.DefaultManager;
+
             if (Device.RuntimePlatform == Device.UWP)
             {
                 var refreshButton = new Button
@@ -158,7 +160,7 @@ namespace ToDooList
             await RefreshItems(true, false);
         }
 
-        private async Task RefreshItems(bool showActivityIndicator, bool syncItems)
+        protected async Task RefreshItems(bool showActivityIndicator, bool syncItems)
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {

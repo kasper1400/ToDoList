@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDooList.MainMenu">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Tervetuloa!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Button x:Name="loginButton" Text="Kirjaudu" MinimumHeightRequest="30"
+                    Clicked="LoginButton_Clicked"/>
+
+            <Button Text="Lapsen näkymä"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="ChildrensView" />
+
+            <Button Text="Vanhemman näkymä"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="ParentsView" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

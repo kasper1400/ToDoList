@@ -24,8 +24,9 @@ namespace ToDooList
         public App ()
 		{
 			// The root page of your application
-			MainPage = new TodoList();
-		}
+			//MainPage = new MainMenu();
+            MainPage = new NavigationPage(new MainMenu());
+        }
 
 		protected override void OnStart ()
 		{

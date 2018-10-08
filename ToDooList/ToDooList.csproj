@@ -9,7 +9,18 @@
         <PackageReference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Version="4.0.2" />
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Update="TodoList.xaml">
+      <Compile Update="Parent.xaml.cs">
+        <DependentUpon>Parent.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Children.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </EmbeddedResource>
+        <EmbeddedResource Update="MainMenu.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Parent.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </EmbeddedResource>
     </ItemGroup>

@@ -102,7 +102,7 @@ namespace ToDooList
                 // Not iOS - the swipe-to-delete is discoverable there
                 if (Device.RuntimePlatform == Device.Android)
                 {
-                    await DisplayAlert(todo.Name, "Press-and-hold to complete task " + todo.Name, "Got it!");
+                    await DisplayAlert(todo.Name, "Paina ja pidä pohjassa kotityötä, jonka haluat merkata valmiiksi" + todo.Name, "Ymmärretty!");
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace ToDooList
             await RefreshItems(true, false);
         }
 
-        protected async Task RefreshItems(bool showActivityIndicator, bool syncItems)
+        private async Task RefreshItems(bool showActivityIndicator, bool syncItems)
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {

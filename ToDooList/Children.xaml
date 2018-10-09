@@ -3,10 +3,140 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDooList.Children">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Vanhempien ulkoasu ensin valmiiksi ja sen kopionti tänne?"
+        <ScrollView>
+        <StackLayout Orientation="Vertical" Padding="5,0,15,0">
+                <StackLayout Orientation="Horizontal" Padding="30,25,30,25">
+                <Label Text="Tehdyt rahat alusta:"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+                <Label Text="0,99"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+            <Button x:Name="btnCheckbox" Text="1" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked"/>
+            <Label Text="Kotityö1"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="1,56"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox2" Text="2" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked2"/>
+                <Label Text="Kotityö2"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="4,64"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox3" Text="3" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked3"/>
+                <Label Text="Kotityö3"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="2,53"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox4" Text="4" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked4"/>
+                <Label Text="Kotityö4"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="4,00"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox5" Text="5" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked5"/>
+                <Label Text="Kotityö5"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="6,00"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox6" Text="6" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked6"/>
+                <Label Text="Kotityö6"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="7,99"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox7" Text="7" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked7"/>
+                <Label Text="Kotityö7"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="8,00"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnCheckbox8" Text="8" WidthRequest="20" HeightRequest="20"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="StartAndExpand"
+                Clicked="Button_Clicked8"/>
+                <Label Text="Kotityö8"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+                <Label Text="9,00"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+                <Label Text="€"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="EndAndExpand" />
+            </StackLayout>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

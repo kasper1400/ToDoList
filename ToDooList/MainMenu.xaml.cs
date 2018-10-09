@@ -40,10 +40,10 @@ namespace ToDooList
         }
 
         private void ChildrensView(object sender, EventArgs e)
-        {
+        {           
             if (authenticated == true)
             {
-                Navigation.PushAsync(new Children());
+               Navigation.PushAsync(new Children());
             }
             else
             {

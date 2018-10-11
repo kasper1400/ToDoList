@@ -11,43 +11,14 @@ namespace ToDooList
         // Track whether the user has authenticated.
         bool authenticated = true;
 
+        private string parentsEmail;
 
-        public Parent()
+        public Parent(string parentsEmail)
         {
            InitializeComponent();
 
-        manager = TodoItemManager.DefaultManager;
-
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                var refreshButton = new Button
-                {
-                    Text = "Refresh",
-                    HeightRequest = 30
-                };
-                refreshButton.Clicked += OnRefreshItems;
-                buttonsPanel.Children.Add(refreshButton);
-                if (manager.IsOfflineEnabled)
-                {
-                    var syncButton = new Button
-                    {
-                        Text = "Sync items",
-                        HeightRequest = 30
-                    };
-                    syncButton.Clicked += OnSyncItems;
-                    buttonsPanel.Children.Add(syncButton);
-                }
-            }
-        }
-
-        async void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            if (App.Authenticator != null)
-                authenticated = await App.Authenticator.Authenticate();
-
-            // Set syncItems to true to synchronize the data on startup when offline is enabled.
-            if (authenticated == true)
-                await RefreshItems(true, syncItems: false);
+            manager = TodoItemManager.DefaultManager;
+            this.parentsEmail = parentsEmail;
         }
 
         protected override async void OnAppearing()
@@ -62,7 +33,7 @@ namespace ToDooList
                 await RefreshItems(true, syncItems: false);
 
                 // Hide the Sign-in button.
-                this.loginButton.IsVisible = false;
+                //this.loginButton.IsVisible = false;
             }
         }
 
@@ -80,9 +51,10 @@ namespace ToDooList
             todoList.ItemsSource = await manager.GetTodoItemsAsync();
         }
 
+
         public async void OnAdd(object sender, EventArgs e)
-        {
-            var todo = new TodoItem { Name = newItemName.Text, Price = newItemPrice.Text };
+        {           
+            var todo = new TodoItem { Task = newItemName.Text, Price = newItemPrice.Text, ParentsEmail = parentsEmail };
             await AddItem(todo);
 
             newItemName.Text = string.Empty;
@@ -90,7 +62,6 @@ namespace ToDooList
 
             newItemPrice.Text = string.Empty;
             newItemPrice.Unfocus();
-
         }
 
         // Event handlers
@@ -102,12 +73,12 @@ namespace ToDooList
                 // Not iOS - the swipe-to-delete is discoverable there
                 if (Device.RuntimePlatform == Device.Android)
                 {
-                    await DisplayAlert(todo.Name, "Paina ja pidä pohjassa kotityötä, jonka haluat merkata valmiiksi" + todo.Name, "Ymmärretty!");
+                    await DisplayAlert(todo.Task, "Paina ja pidä pohjassa kotityötä, jonka haluat merkata valmiiksi" + todo.Task, "Ymmärretty!");
                 }
                 else
                 {
                     // Windows, not all platforms support the Context Actions yet
-                    if (await DisplayAlert("Mark completed?", "Do you wish to complete " + todo.Name + "?", "Complete", "Cancel"))
+                    if (await DisplayAlert("Mark completed?", "Do you wish to complete " + todo.Task + "?", "Complete", "Cancel"))
                     {
                         await CompleteItem(todo);
                     }

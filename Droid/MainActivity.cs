@@ -45,6 +45,8 @@ namespace ToDooList.Droid
         // Define a authenticated user.
         private MobileServiceUser user;
 
+       
+
         public async Task<bool> Authenticate()
         {
             var success = false;
@@ -58,6 +60,7 @@ namespace ToDooList.Droid
                 {
                     message = string.Format("Kirjautuminen onnistui, SID: {0}.",
                         user.UserId);
+
                     success = true;
                 }
             }

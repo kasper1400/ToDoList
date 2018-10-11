@@ -20,6 +20,23 @@
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
                 Clicked="ParentsView" />
+            
+            <Label Text="Lapsen sähköposti:"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="childrensEmailInput" PlaceholderColor="#000000" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
+            <Button x:Name="EmailToLabel" Text="+" Clicked="EmailToLabel_Clicked"/>
+            <Label x:Name="EmailLabel"/>
+            <Button x:Name="ClearEmailLabel" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked"/>
+
+            <Label Text="Vanhemman sähköposti:"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="parentsEmailInput" PlaceholderColor="#000000" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
+            <Button x:Name="ParentsEmailToLabel" Text="+" Clicked="ParentsEmailToLabel_Clicked"/>
+            <Label x:Name="ParentsEmailLabel"/>
+            <Button x:Name="ClearParentsEmailLabel" Text="Poista sähköposti" Clicked="ClearParentsEmailLabel_Clicked"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

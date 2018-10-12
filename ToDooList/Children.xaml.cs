@@ -35,8 +35,8 @@ namespace ToDooList
 
             this.childrensEmail = childrensEmail;
             this.parentsEmail = parentsEmail;
-            this.client = new MobileServiceClient(Constants.ApplicationURL);
 
+            this.client = new MobileServiceClient(Constants.ApplicationURL);
             this.todoTable = client.GetTable<TodoItem>();
         }
 

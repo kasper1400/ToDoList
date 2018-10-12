@@ -13,6 +13,8 @@ namespace ToDooList
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainMenu : ContentPage
 	{
+
+
         public static bool authenticated = false;
 
         public string myEmail;
@@ -23,6 +25,7 @@ namespace ToDooList
         public static void Init(IAuthenticate authenticator)
         {
             Authenticator = authenticator;
+
         }
 
         public MainMenu ()
@@ -65,6 +68,7 @@ namespace ToDooList
             else if (authenticated == true)
             {
                 string parentsEmail = ParentsEmailLabel.Text;
+
 
                 Navigation.PushAsync(new Parent(parentsEmail));
             }          

@@ -25,7 +25,6 @@ namespace ToDooList
 
             this.todoTable = client.GetTable<TodoItem>();
 
- 
         }
 
         public static TodoItemManager DefaultManager
@@ -45,14 +44,16 @@ namespace ToDooList
             get { return client; }
         }
 
-        public bool IsOfflineEnabled
-        {
-            get { return todoTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<TodoItem>; }
-        }
+        //public bool IsOfflineEnabled
+        //{
+        //    get { return todoTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<TodoItem>; }
+        //}
 
         public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsync(bool syncItems = false  )
         {
+
             
+
             try
             {
                 IEnumerable<TodoItem> items = await todoTable

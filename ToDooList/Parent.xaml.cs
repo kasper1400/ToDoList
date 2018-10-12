@@ -1,24 +1,42 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
+using System.Collections;
+
 
 namespace ToDooList
 {
     public partial class Parent : ContentPage
     {
-        TodoItemManager manager;
 
         // Track whether the user has authenticated.
         bool authenticated = true;
 
         private string parentsEmail;
 
+        static TodoItemManager defaultInstance = new TodoItemManager();
+        MobileServiceClient client;
+
+        IMobileServiceTable<TodoItem> todoTable;
+
+        TodoItemManager manager;
+
         public Parent(string parentsEmail)
         {
-           InitializeComponent();
+            InitializeComponent();
+
+            this.parentsEmail = parentsEmail;
 
             manager = TodoItemManager.DefaultManager;
-            this.parentsEmail = parentsEmail;
+
+            this.client = new MobileServiceClient(Constants.ApplicationURL);
+            this.todoTable = client.GetTable<TodoItem>();
         }
 
         protected override async void OnAppearing()
@@ -41,16 +59,37 @@ namespace ToDooList
         async Task AddItem(TodoItem item)
         {
             await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await manager.GetTodoItemsAsync();
+            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
         }
 
         async Task CompleteItem(TodoItem item)
         {
             item.Done = true;
             await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await manager.GetTodoItemsAsync();
+            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
         }
 
+        public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncParentsView(bool syncItems = false)
+        {
+            try
+            {
+
+                IEnumerable<TodoItem> items = await todoTable
+                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.Done)
+                    .ToEnumerableAsync();
+
+                return new ObservableCollection<TodoItem>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine("Invalid sync operation: {0}", new[] { msioe.Message });
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Sync error: {0}", new[] { e.Message });
+            }
+            return null;
+        }
 
         public async void OnAdd(object sender, EventArgs e)
         {           
@@ -89,7 +128,6 @@ namespace ToDooList
             todoList.SelectedItem = null;
         }
 
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#context
         public async void OnComplete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
@@ -97,7 +135,6 @@ namespace ToDooList
             await CompleteItem(todo);
         }
 
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#pulltorefresh
         public async void OnRefresh(object sender, EventArgs e)
         {
             var list = (ListView)sender;
@@ -135,7 +172,7 @@ namespace ToDooList
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {
-                todoList.ItemsSource = await manager.GetTodoItemsAsync(syncItems);
+                todoList.ItemsSource = await GetTodoItemsAsyncParentsView(syncItems);
             }
         }
 

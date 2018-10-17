@@ -15,9 +15,7 @@
                        IsEnabled="True"
                        x:Name="syncIndicator"/>
     <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
-      <Label TextColor="#ffffff" Text="ToDoList" />
-            <Button x:Name="loginButton" Text="Vaihda käyttäjää" MinimumHeightRequest="30"
-                    Clicked="LoginButton_Clicked"/>
+            <Label TextColor="#ffffff" Text="ToDoList" />
             <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
@@ -47,13 +45,14 @@
         <DataTemplate>
           <ViewCell>
             <ViewCell.ContextActions>
-              <MenuItem Clicked="OnComplete" Text="Merkitse valmiiksi" CommandParameter="{Binding .}"/>
+              <MenuItem Clicked="OnComplete" Text="Kuittaa kotityö" CommandParameter="{Binding .}"/>
             </ViewCell.ContextActions>
             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
-              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                <Label Text="{Binding Name}"  />
-                <Label Text="{Binding Price}"  />
-              </StackLayout>
+              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                       <Label Text="{Binding Task}"/>
+                       <Label Text="{Binding Price}"/>
+                       <Label Text="{Binding ParentsEmail}"/>
+                 </StackLayout>
             </StackLayout>
           </ViewCell>
         </DataTemplate>

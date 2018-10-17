@@ -1,53 +1,42 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
+using System.Collections;
+
 
 namespace ToDooList
 {
     public partial class Parent : ContentPage
     {
-        TodoItemManager manager;
 
         // Track whether the user has authenticated.
         bool authenticated = true;
 
+        private string parentsEmail;
 
-        public Parent()
+        static TodoItemManager defaultInstance = new TodoItemManager();
+        MobileServiceClient client;
+
+        IMobileServiceTable<TodoItem> todoTable;
+
+        TodoItemManager manager;
+
+        public Parent(string parentsEmail)
         {
-           InitializeComponent();
+            InitializeComponent();
 
-        manager = TodoItemManager.DefaultManager;
+            this.parentsEmail = parentsEmail;
 
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                var refreshButton = new Button
-                {
-                    Text = "Refresh",
-                    HeightRequest = 30
-                };
-                refreshButton.Clicked += OnRefreshItems;
-                buttonsPanel.Children.Add(refreshButton);
-                if (manager.IsOfflineEnabled)
-                {
-                    var syncButton = new Button
-                    {
-                        Text = "Sync items",
-                        HeightRequest = 30
-                    };
-                    syncButton.Clicked += OnSyncItems;
-                    buttonsPanel.Children.Add(syncButton);
-                }
-            }
-        }
+            manager = TodoItemManager.DefaultManager;
 
-        async void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            if (App.Authenticator != null)
-                authenticated = await App.Authenticator.Authenticate();
-
-            // Set syncItems to true to synchronize the data on startup when offline is enabled.
-            if (authenticated == true)
-                await RefreshItems(true, syncItems: false);
+            this.client = new MobileServiceClient(Constants.ApplicationURL);
+            this.todoTable = client.GetTable<TodoItem>();
         }
 
         protected override async void OnAppearing()
@@ -62,7 +51,7 @@ namespace ToDooList
                 await RefreshItems(true, syncItems: false);
 
                 // Hide the Sign-in button.
-                this.loginButton.IsVisible = false;
+                //this.loginButton.IsVisible = false;
             }
         }
 
@@ -70,19 +59,41 @@ namespace ToDooList
         async Task AddItem(TodoItem item)
         {
             await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await manager.GetTodoItemsAsync();
+            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
         }
 
         async Task CompleteItem(TodoItem item)
         {
             item.Done = true;
             await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await manager.GetTodoItemsAsync();
+            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
+        }
+
+        public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncParentsView(bool syncItems = false)
+        {
+            try
+            {
+
+                IEnumerable<TodoItem> items = await todoTable
+                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.Done)
+                    .ToEnumerableAsync();
+
+                return new ObservableCollection<TodoItem>(items);
+            }
+            catch (MobileServiceInvalidOperationException msioe)
+            {
+                Debug.WriteLine("Invalid sync operation: {0}", new[] { msioe.Message });
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Sync error: {0}", new[] { e.Message });
+            }
+            return null;
         }
 
         public async void OnAdd(object sender, EventArgs e)
-        {
-            var todo = new TodoItem { Name = newItemName.Text, Price = newItemPrice.Text };
+        {           
+            var todo = new TodoItem { Task = newItemName.Text, Price = newItemPrice.Text, ParentsEmail = parentsEmail };
             await AddItem(todo);
 
             newItemName.Text = string.Empty;
@@ -90,7 +101,6 @@ namespace ToDooList
 
             newItemPrice.Text = string.Empty;
             newItemPrice.Unfocus();
-
         }
 
         // Event handlers
@@ -102,12 +112,12 @@ namespace ToDooList
                 // Not iOS - the swipe-to-delete is discoverable there
                 if (Device.RuntimePlatform == Device.Android)
                 {
-                    await DisplayAlert(todo.Name, "Paina ja pidä pohjassa kotityötä, jonka haluat merkata valmiiksi" + todo.Name, "Ymmärretty!");
+                    await DisplayAlert(todo.Task, "Paina ja pidä pohjassa kotityötä, jonka haluat merkata valmiiksi" + todo.Task, "Ymmärretty!");
                 }
                 else
                 {
                     // Windows, not all platforms support the Context Actions yet
-                    if (await DisplayAlert("Mark completed?", "Do you wish to complete " + todo.Name + "?", "Complete", "Cancel"))
+                    if (await DisplayAlert("Mark completed?", "Do you wish to complete " + todo.Task + "?", "Complete", "Cancel"))
                     {
                         await CompleteItem(todo);
                     }
@@ -118,7 +128,6 @@ namespace ToDooList
             todoList.SelectedItem = null;
         }
 
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#context
         public async void OnComplete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
@@ -126,7 +135,6 @@ namespace ToDooList
             await CompleteItem(todo);
         }
 
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#pulltorefresh
         public async void OnRefresh(object sender, EventArgs e)
         {
             var list = (ListView)sender;
@@ -164,7 +172,7 @@ namespace ToDooList
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {
-                todoList.ItemsSource = await manager.GetTodoItemsAsync(syncItems);
+                todoList.ItemsSource = await GetTodoItemsAsyncParentsView(syncItems);
             }
         }
 

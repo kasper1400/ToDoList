@@ -42,6 +42,7 @@
                         </ViewCell.ContextActions> 
                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
                             <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                                <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>
                                 <Label Text="{Binding Task}"/>
                                 <Label Text="{Binding Price}"/>
                                 <Label Text="{Binding ParentsEmail}"/>

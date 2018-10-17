@@ -21,19 +21,21 @@
           <ColumnDefinition/>
           <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-                <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0"/>
-                <Entry x:Name="newItemName" PlaceholderColor="#ffffff" Grid.Column="0" Grid.Row="0"
+                <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0" FontSize="10"/>
+                
+                <Entry x:Name="newItemName" PlaceholderColor="#D3D3D3" Grid.Column="0" Grid.Row="0" FontSize="8" 
                   Placeholder="..." />
 
-                <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0"/>
-                <Entry x:Name="newItemPrice" PlaceholderColor="#ffffff" Grid.Column="2" Grid.Row="0"
+                <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0" FontSize="10"/>
+                
+                <Entry x:Name="newItemPrice" PlaceholderColor="#D3D3D3" Grid.Column="2" Grid.Row="0" FontSize="8"
                   Placeholder=".." />
 
-                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-          <Button Text="+"
-                  MinimumHeightRequest="30"
-                  Clicked="OnAdd" />
-
+                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
+                    <Button Text="+"
+                  WidthRequest="40"
+                  HeightRequest="40"
+                  Clicked="OnAdd"/>
                 </StackLayout>
       </Grid>
     </StackLayout>
@@ -48,12 +50,15 @@
               <MenuItem Clicked="OnComplete" Text="Kuittaa kotityö" CommandParameter="{Binding .}"/>
             </ViewCell.ContextActions>
             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
-              <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                            <ScrollView>
+                <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                       <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>
                        <Label Text="{Binding Task}"/>
                        <Label Text="{Binding Price}"/>
                        <Label Text="{Binding ParentsEmail}"/>
                  </StackLayout>
-            </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>

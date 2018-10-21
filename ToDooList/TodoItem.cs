@@ -13,6 +13,7 @@ namespace ToDooList
         string parentsEmail;
         bool taskready;
         bool done;
+        bool softdelete;
 
         [JsonProperty(PropertyName = "id")]
 		public string Id
@@ -54,6 +55,13 @@ namespace ToDooList
         {
             get { return taskready; }
             set { taskready = value; }
+        }
+
+        [JsonProperty(PropertyName = "SoftDelete")]
+        public bool SoftDelete
+        {
+            get { return softdelete; }
+            set { softdelete = value; }
         }
 
         [JsonProperty(PropertyName = "complete")]

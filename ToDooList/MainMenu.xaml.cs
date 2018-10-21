@@ -15,7 +15,7 @@ namespace ToDooList
 	{
 
 
-        public static bool authenticated = false;
+        bool authenticated = false;
 
         public string myEmail;
         public string parentsEmail;

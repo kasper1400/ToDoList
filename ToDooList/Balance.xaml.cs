@@ -9,12 +9,12 @@ using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
 using System.Collections;
 
-
 namespace ToDooList
 {
-    public partial class Parent : ContentPage
-    {
 
+ 	public partial class Balance : ContentPage
+	{
+ 
         // Track whether the user has authenticated.
         bool authenticated = true;
 
@@ -27,21 +27,19 @@ namespace ToDooList
 
         TodoItemManager manager;
 
-        public Parent(string parentsEmail)
+
+        public Balance(string parentsEmail)
         {
             InitializeComponent();
 
             this.parentsEmail = parentsEmail;
 
+            string Balance = balanceLabel.Text;
+
             manager = TodoItemManager.DefaultManager;
 
             this.client = new MobileServiceClient(Constants.ApplicationURL);
             this.todoTable = client.GetTable<TodoItem>();
-        }
-
-        private void BalanceView(object sender, EventArgs e)
-        {
-             Navigation.PushAsync(new Balance(parentsEmail));
         }
 
         protected override async void OnAppearing()
@@ -61,26 +59,20 @@ namespace ToDooList
         }
 
         // Data methods
-        async Task AddItem(TodoItem item)
+        async Task DeleteItem(TodoItem item)
         {
+            item.SoftDelete  = true;
             await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
+            todoList.ItemsSource = await GetTodoItemsAsyncBalanceView();
         }
 
-        async Task CompleteItem(TodoItem item)
-        {
-            item.Done = true;
-            await manager.SaveTaskAsync(item);
-            todoList.ItemsSource = await GetTodoItemsAsyncParentsView();
-        }
-
-        public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncParentsView(bool syncItems = false)
+        public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncBalanceView(bool syncItems = false)
         {
             try
             {
 
                 IEnumerable<TodoItem> items = await todoTable
-                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.Done)
+                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete )
                     .ToEnumerableAsync();
 
                 return new ObservableCollection<TodoItem>(items);
@@ -94,18 +86,6 @@ namespace ToDooList
                 Debug.WriteLine("Sync error: {0}", new[] { e.Message });
             }
             return null;
-        }
-
-        public async void OnAdd(object sender, EventArgs e)
-        {           
-            var todo = new TodoItem { Task = newItemName.Text, Price = newItemPrice.Text, ParentsEmail = parentsEmail };
-            await AddItem(todo);
-
-            newItemName.Text = string.Empty;
-            newItemName.Unfocus();
-
-            newItemPrice.Text = string.Empty;
-            newItemPrice.Unfocus();
         }
 
         // Event handlers
@@ -122,9 +102,9 @@ namespace ToDooList
                 else
                 {
                     // Windows, not all platforms support the Context Actions yet
-                    if (await DisplayAlert("Mark completed?", "Do you wish to complete " + todo.Task + "?", "Complete", "Cancel"))
+                    if (await DisplayAlert("Mark completed?", "Do you wish to delete " + todo.Task + "?", "Delete", "Cancel"))
                     {
-                        await CompleteItem(todo);
+                        await DeleteItem(todo);
                     }
                 }
             }
@@ -137,7 +117,7 @@ namespace ToDooList
         {
             var mi = ((MenuItem)sender);
             var todo = mi.CommandParameter as TodoItem;
-            await CompleteItem(todo);
+            await DeleteItem(todo);
         }
 
         public async void OnRefresh(object sender, EventArgs e)
@@ -177,7 +157,7 @@ namespace ToDooList
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {
-                todoList.ItemsSource = await GetTodoItemsAsyncParentsView(syncItems);
+                todoList.ItemsSource = await GetTodoItemsAsyncBalanceView(syncItems);
             }
         }
 
@@ -217,11 +197,5 @@ namespace ToDooList
                 }
             }
         }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
-        }
     }
 }
-

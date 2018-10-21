@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 	xmlns="http://xamarin.com/schemas/2014/forms" 
 				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-				x:Class="ToDooList.Children">
+				x:Class="ToDooList.Balance"
+				Title="ToDoList">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -14,18 +15,16 @@
                        IsEnabled="True"
                        x:Name="syncIndicator"/>
         <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
-            <Label TextColor="#ffffff" Text="Lapsen näkymä" />
-            <Label TextColor="#ffffff" Text="Paina ja pidä kotityötä pohjassa hyväksyäksesi sen" />
-
+            <Label TextColor="#ffffff" Text="Valmistuneet kotityöt ja balanssi" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                <Label TextColor="#ffffff" Text="Valmistuneet kotityöt ja balanssi" Grid.Row="0" Grid.Column="0"/>
+                <Label x:Name="balanceLabel" TextColor="#ffffff" Text="?€" Grid.Row="1" Grid.Column="1" />
 
-                <StackLayout> <!-- x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                    <Button Text="+"
-                  MinimumHeightRequest="30"/> -->
+                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
 
                 </StackLayout>
             </Grid>
@@ -38,16 +37,17 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnComplete" Text="Merkitse kotityö valmiiksi" CommandParameter="{Binding .}"/>
-                        </ViewCell.ContextActions> 
+                            <MenuItem Clicked="OnComplete" Text="Poista tehtävä" CommandParameter="{Binding .}"/>
+                        </ViewCell.ContextActions>
                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
-                            <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                                <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>
-                                <Label Text="{Binding Task}"/>
-                                <Label Text="{Binding Price}"/>
-                                <Label Text="{Binding ParentsEmail}"/>
-                                <Label Text="{Binding TaskReady}"/>
-                            </StackLayout>
+                            <ScrollView>
+                                <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                                    <Label Text="{Binding Task}"/>
+                                    <Label Text="{Binding Price}"/>
+                                    <Label Text="{Binding ParentsEmail}"/>
+                                    <Label Text="{Binding Complete}"/>
+                                </StackLayout>
+                            </ScrollView>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

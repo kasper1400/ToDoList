@@ -16,17 +16,20 @@
                        x:Name="syncIndicator"/>
     <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
             <Label TextColor="#ffffff" Text="ToDoList" />
+            <Button Text="Balanssi ->" Clicked="BalanceView" HorizontalOptions="End"/>
             <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
           <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-                <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0" FontSize="10"/>
+
+                
+                <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0"/>
                 
                 <Entry x:Name="newItemName" PlaceholderColor="#D3D3D3" Grid.Column="0" Grid.Row="0" FontSize="8" 
                   Placeholder="..." />
 
-                <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0" FontSize="10"/>
+                <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0"/>
                 
                 <Entry x:Name="newItemPrice" PlaceholderColor="#D3D3D3" Grid.Column="2" Grid.Row="0" FontSize="8"
                   Placeholder=".." />
@@ -55,8 +58,9 @@
                        <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>
                        <Label Text="{Binding Task}"/>
                        <Label Text="{Binding Price}"/>
-                       <Label Text="{Binding ParentsEmail}"/>
-                 </StackLayout>
+                       <Label Text="{Binding ChildrensEmail}"/>
+                       <Label Text="{Binding TaskReady}"/>
+                                </StackLayout>
                             </ScrollView>
                         </StackLayout>
           </ViewCell>

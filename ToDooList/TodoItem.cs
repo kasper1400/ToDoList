@@ -8,7 +8,7 @@ namespace ToDooList
 	{
 		string id;
 		string task;
-        string price;
+        int price;
         string childrensEmail;
         string parentsEmail;
         bool taskready;
@@ -30,7 +30,7 @@ namespace ToDooList
 		}
 
         [JsonProperty(PropertyName = "Price")]
-        public string Price
+        public int Price
         {
             get { return price; }
             set { price = value; }

@@ -98,14 +98,14 @@ namespace ToDooList
 
         public async void OnAdd(object sender, EventArgs e)
         {           
-            var todo = new TodoItem { Task = newItemName.Text, Price = newItemPrice.Text, ParentsEmail = parentsEmail };
+            var todo = new TodoItem { Task = newItemName.Text, Price = Convert.ToInt32(newItemPrice.Text), ParentsEmail = parentsEmail };
             await AddItem(todo);
 
             newItemName.Text = string.Empty;
             newItemName.Unfocus();
 
-            newItemPrice.Text = string.Empty;
-            newItemPrice.Unfocus();
+            //newItemPrice.Text = string.Empty;
+            //newItemPrice.Unfocus();
         }
 
         // Event handlers

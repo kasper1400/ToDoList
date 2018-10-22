@@ -21,8 +21,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label TextColor="#ffffff" Text="Valmistuneet kotityöt ja balanssi" Grid.Row="0" Grid.Column="0"/>
-                <Label x:Name="balanceLabel" TextColor="#ffffff" Text="?€" Grid.Row="1" Grid.Column="1" />
+                <Label x:Name="balanceLabel" TextColor="#ffffff" Text="€" Grid.Row="0" Grid.Column="0" />
 
                 <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
 
@@ -45,7 +44,7 @@
                                     <Label Text="{Binding Task}"/>
                                     <Label Text="{Binding Price}"/>
                                     <Label Text="{Binding ParentsEmail}"/>
-                                    <Label Text="{Binding Complete}"/>
+                                    <Label Text="{Binding Done}"/>
                                 </StackLayout>
                             </ScrollView>
                         </StackLayout>

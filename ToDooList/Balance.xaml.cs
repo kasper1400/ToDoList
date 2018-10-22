@@ -8,17 +8,19 @@ using System.Text;
 using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
 using System.Collections;
+using System.ComponentModel;
 
 namespace ToDooList
 {
 
  	public partial class Balance : ContentPage
 	{
- 
+
         // Track whether the user has authenticated.
         bool authenticated = true;
 
         private string parentsEmail;
+        private int prices;
 
         static TodoItemManager defaultInstance = new TodoItemManager();
         MobileServiceClient client;
@@ -34,17 +36,29 @@ namespace ToDooList
 
             this.parentsEmail = parentsEmail;
 
-            string Balance = balanceLabel.Text;
-
             manager = TodoItemManager.DefaultManager;
 
             this.client = new MobileServiceClient(Constants.ApplicationURL);
             this.todoTable = client.GetTable<TodoItem>();
         }
 
+        async Task GetPrices(int prices)
+        {
+            IEnumerable<TodoItem> items = await todoTable
+            .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete)
+            .ToEnumerableAsync();
+
+            foreach (TodoItem item in items)
+            {
+                prices += item.Price;
+            }
+            balanceLabel.Text = "Balanssi: " + prices.ToString() + "€";
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
 
             // Refresh items only when authenticated.
             if (authenticated == true)
@@ -55,8 +69,12 @@ namespace ToDooList
 
                 // Hide the Sign-in button.
                 //this.loginButton.IsVisible = false;
+
+                // Combined ListView item prices to label
+                await GetPrices(prices);
             }
         }
+        
 
         // Data methods
         async Task DeleteItem(TodoItem item)
@@ -64,7 +82,9 @@ namespace ToDooList
             item.SoftDelete  = true;
             await manager.SaveTaskAsync(item);
             todoList.ItemsSource = await GetTodoItemsAsyncBalanceView();
+            await GetPrices(prices);
         }
+
 
         public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncBalanceView(bool syncItems = false)
         {
@@ -74,8 +94,8 @@ namespace ToDooList
                 IEnumerable<TodoItem> items = await todoTable
                     .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete )
                     .ToEnumerableAsync();
-
                 return new ObservableCollection<TodoItem>(items);
+
             }
             catch (MobileServiceInvalidOperationException msioe)
             {

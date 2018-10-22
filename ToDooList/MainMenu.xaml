@@ -6,8 +6,9 @@
         <ScrollView>
             <StackLayout HorizontalOptions="Center">
             <StackLayout VerticalOptions="Start">
-                <Label Text="Tervetuloa!" />
-
+                    <ContentView Padding="0,25,0,5">
+                        <Label FontSize = "20" HorizontalOptions="Center" Text="Tervetuloa!" />
+                    </ContentView>
                 <Button x:Name="loginButton" Text="Kirjaudu"
                     Clicked="LoginButton_Clicked"/>
             </StackLayout>
@@ -18,18 +19,40 @@
                 <Button Text="Vanhemman näkymä"
                 Clicked="ParentsView" />
             </StackLayout>
+                
             <StackLayout VerticalOptions="End">
-                <Label Text="Lapsen sähköposti:" />
-                    <Entry x:Name="childrensEmailInput" PlaceholderColor="#D3D3D3" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
-                <Button x:Name="EmailToLabel" Text="+" Clicked="EmailToLabel_Clicked"/>
-                <Label x:Name="EmailLabel"/>
-                <Button x:Name="ClearEmailLabel" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked"/>
 
-                <Label Text="Vanhemman sähköposti:"/>
-                    <Entry x:Name="parentsEmailInput" PlaceholderColor="#D3D3D3" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
-                <Button x:Name="ParentsEmailToLabel" Text="+" Clicked="ParentsEmailToLabel_Clicked"/>
-                <Label x:Name="ParentsEmailLabel"/>
-                <Button x:Name="ClearParentsEmailLabel" Text="Poista sähköposti" Clicked="ClearParentsEmailLabel_Clicked"/>
+                    <ContentView Padding="0,25,0,0">
+                        <Label Text="Lapsen sähköposti:" />
+                    </ContentView>
+
+                    <Entry x:Name="childrensEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
+
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Button x:Name="EmailToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="EmailToLabel_Clicked"/>
+                            <Label x:Name="EmailLabel"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Button x:Name="ClearEmailLabel" FontSize="12" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked"/>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <Label Text="Vanhemman sähköposti:"/>
+                    <Entry x:Name="parentsEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
+                                                         
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Button x:Name="ParentsEmailToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ParentsEmailToLabel_Clicked"/>
+                            <Label x:Name="ParentsEmailLabel"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Button x:Name="ClearParentsEmailLabel" FontSize="12" Text="Poista sähköposti" Clicked="ClearParentsEmailLabel_Clicked"/>
+                        </StackLayout>
+                    </StackLayout>
+
+
             </StackLayout>
 
         </StackLayout>

@@ -4,6 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Xam.Plugins.Messaging" Version="5.0.0" />
         <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
         <PackageReference Include="Microsoft.Azure.Mobile.Client" Version="4.0.2" />
         <PackageReference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Version="4.0.2" />
@@ -18,6 +19,9 @@
           <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </EmbeddedResource>
         <EmbeddedResource Update="MainMenu.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Map.xaml">
           <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </EmbeddedResource>
         <EmbeddedResource Update="Parent.xaml">

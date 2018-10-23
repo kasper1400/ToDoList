@@ -19,7 +19,8 @@ namespace ToDooList
         bool authenticated = true;
 
         private string parentsEmail;
-
+        private string childrensEmail;
+        
         static TodoItemManager defaultInstance = new TodoItemManager();
         MobileServiceClient client;
 
@@ -27,11 +28,12 @@ namespace ToDooList
 
         TodoItemManager manager;
 
-        public Parent(string parentsEmail)
+        public Parent(string childrensEmail, string parentsEmail)
         {
             InitializeComponent();
 
             this.parentsEmail = parentsEmail;
+            this.childrensEmail = childrensEmail;
 
             manager = TodoItemManager.DefaultManager;
 
@@ -41,7 +43,7 @@ namespace ToDooList
 
         private void BalanceView(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new Balance(parentsEmail));
+             Navigation.PushAsync(new Balance(childrensEmail, parentsEmail));
         }
 
         protected override async void OnAppearing()

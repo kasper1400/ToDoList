@@ -18,8 +18,14 @@
 
                 <Button Text="Vanhemman näkymä"
                 Clicked="ParentsView" />
+
+                <Button Text="Balanssi"
+                Clicked="BalanceView" />
+
+            <Button Text="Kartta"
+                Clicked="MapView" />
             </StackLayout>
-                
+
             <StackLayout VerticalOptions="End">
 
                     <ContentView Padding="0,25,0,0">
@@ -30,8 +36,8 @@
 
                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                            <Button x:Name="EmailToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="EmailToLabel_Clicked"/>
-                            <Label x:Name="EmailLabel"/>
+                            <Button x:Name="ChildrensToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ChildrensEmailToLabel_Clicked"/>
+                            <Label x:Name="ChildrensEmailLabel"/>
                         </StackLayout>
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                             <Button x:Name="ClearEmailLabel" FontSize="12" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked"/>

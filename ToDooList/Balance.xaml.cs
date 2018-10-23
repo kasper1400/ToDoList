@@ -9,17 +9,17 @@ using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
 using System.Collections;
 using System.ComponentModel;
+using Plugin.Messaging;
 
 namespace ToDooList
 {
-
  	public partial class Balance : ContentPage
 	{
-
         // Track whether the user has authenticated.
         bool authenticated = true;
 
         private string parentsEmail;
+        private string childrensEmail;
         private int prices;
 
         static TodoItemManager defaultInstance = new TodoItemManager();
@@ -29,12 +29,12 @@ namespace ToDooList
 
         TodoItemManager manager;
 
-
-        public Balance(string parentsEmail)
+        public Balance(string childrensEmail, string parentsEmail)
         {
             InitializeComponent();
-
+            Console.WriteLine(parentsEmail);
             this.parentsEmail = parentsEmail;
+            this.childrensEmail = childrensEmail;
 
             manager = TodoItemManager.DefaultManager;
 
@@ -42,10 +42,32 @@ namespace ToDooList
             this.todoTable = client.GetTable<TodoItem>();
         }
 
+        private void SendEmail_Clicked(object sender, EventArgs e)
+        {
+            var emailTask = CrossMessaging.Current.EmailMessenger;
+            if (emailTask.CanSendEmail)
+            {
+                // Simple e-mail to single receiver without attachments, CC, or BCC.
+                emailTask.SendEmail(childrensEmail, "Ilmoitus kotitöiden maksusta", "Hei, sinulle on lähetetty seuraava maksu: " +
+                    balanceLabel.Text + ". Terveisin, " + parentsEmail);
+
+                // More complex emails can also be sent:
+                //var email = new EmailMessageBuilder()
+                //  .To("plugins@xamarin.com")
+                //  .Cc("plugins.cc@xamarin.com")
+                //  .Bcc(new[] { "plugins.bcc@xamarin.com", "plugins.bcc2@xamarin.com" })
+                //  .Subject("Xamarin Messaging Plugin")
+                //  .Body("Hello from your friends at Xamarin!")
+                //  .Build();
+
+                //emailTask.SendEmail(email);
+            }
+        }
+
         async Task GetPrices(int prices)
         {
             IEnumerable<TodoItem> items = await todoTable
-            .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete)
+            .Where(todoItem => todoItem.ParentsEmail == parentsEmail && todoItem.Done == true && !todoItem.SoftDelete)
             .ToEnumerableAsync();
 
             foreach (TodoItem item in items)
@@ -92,7 +114,7 @@ namespace ToDooList
             {
 
                 IEnumerable<TodoItem> items = await todoTable
-                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete )
+                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && todoItem.Done == true && !todoItem.SoftDelete )
                     .ToEnumerableAsync();
                 return new ObservableCollection<TodoItem>(items);
 

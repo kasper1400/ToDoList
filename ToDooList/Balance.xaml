@@ -24,7 +24,9 @@
                 <Label x:Name="balanceLabel" TextColor="#ffffff" Text="€" Grid.Row="0" Grid.Column="0" />
 
                 <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
-
+                    
+                    <Button Text="Lähetä sähköposti" Clicked="SendEmail_Clicked" />
+                    <Label x:Name="receiverLabel" TextColor="#ffffff" Text="receiverLabel" />
                 </StackLayout>
             </Grid>
         </StackLayout>
@@ -36,7 +38,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnComplete" Text="Poista tehtävä" CommandParameter="{Binding .}"/>
+                            <MenuItem Clicked="OnComplete" Text="Poista kotityö" CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                         <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
                             <ScrollView>

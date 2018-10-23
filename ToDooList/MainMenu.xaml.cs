@@ -13,11 +13,9 @@ namespace ToDooList
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainMenu : ContentPage
 	{
-
-
         bool authenticated = false;
 
-        public string myEmail;
+        public string childrensEmail;
         public string parentsEmail;
 
         public static IAuthenticate Authenticator { get; private set; }
@@ -31,26 +29,25 @@ namespace ToDooList
         public MainMenu ()
 		{
 			InitializeComponent ();
-            string myEmail = childrensEmailInput.Text;
-            string parentsEmail = parentsEmailInput.Text;
-
+            
+            
         }
 
-        private void EmailToLabel_Clicked(object sender, EventArgs e)
+        private void ChildrensEmailToLabel_Clicked(object sender, EventArgs e)
         {
-                EmailLabel.Text = childrensEmailInput.Text;
+            ChildrensEmailLabel.Text = childrensEmailInput.Text;
+            childrensEmail = ChildrensEmailLabel.Text;
         }
 
         private void ParentsEmailToLabel_Clicked(object sender, EventArgs e)
         {
            ParentsEmailLabel.Text = parentsEmailInput.Text;
-
-
+           parentsEmail = ParentsEmailLabel.Text;
         }
 
         private void ClearEmailLabel_Clicked(object sender, EventArgs e)
         {
-            EmailLabel.Text = null;
+            ChildrensEmailLabel.Text = null;
         }
 
         private void ClearParentsEmailLabel_Clicked(object sender, EventArgs e)
@@ -67,10 +64,7 @@ namespace ToDooList
             }
             else if (authenticated == true)
             {
-                string parentsEmail = ParentsEmailLabel.Text;
-
-
-                Navigation.PushAsync(new Parent(parentsEmail));
+                Navigation.PushAsync(new Parent(childrensEmail, parentsEmail));
             }          
             else
             {
@@ -82,14 +76,12 @@ namespace ToDooList
         private void ChildrensView(object sender, EventArgs e)
         {
 
-            if (EmailLabel.Text == null || ParentsEmailLabel.Text == null)
+            if (ChildrensEmailLabel.Text == null || ParentsEmailLabel.Text == null)
             {
                 DisplayAlert("Pääsy estetty", "Täytä sähköpostisi ja vanhempasi sähköposti!", "OK");
             }
             else if (authenticated == true)
             {
-                string childrensEmail = EmailLabel.Text;
-                string parentsEmail = ParentsEmailLabel.Text;
 
                 Navigation.PushAsync(new Children(childrensEmail, parentsEmail));
             }
@@ -98,6 +90,16 @@ namespace ToDooList
                 DisplayAlert("Pääsy estetty", "Tunnistaudu ensin", "OK");
             }
 
+        }
+
+        private void BalanceView(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Balance(childrensEmail, parentsEmail));
+        }
+
+        private void MapView(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Map(childrensEmail, parentsEmail));
         }
 
         async void LoginButton_Clicked(object sender, EventArgs e)

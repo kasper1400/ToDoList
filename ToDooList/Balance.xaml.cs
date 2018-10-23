@@ -32,7 +32,6 @@ namespace ToDooList
         public Balance(string childrensEmail, string parentsEmail)
         {
             InitializeComponent();
-            Console.WriteLine(parentsEmail);
             this.parentsEmail = parentsEmail;
             this.childrensEmail = childrensEmail;
 

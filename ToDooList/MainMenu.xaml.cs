@@ -99,7 +99,7 @@ namespace ToDooList
 
         private void MapView(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Map(childrensEmail, parentsEmail));
+            Navigation.PushAsync(new MapView(childrensEmail, parentsEmail));
         }
 
         async void LoginButton_Clicked(object sender, EventArgs e)

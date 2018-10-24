@@ -10,51 +10,86 @@
                         <Label FontSize = "20" HorizontalOptions="Center" Text="Tervetuloa!" />
                     </ContentView>
                 <Button x:Name="loginButton" Text="Kirjaudu"
-                    Clicked="LoginButton_Clicked"/>
+                    Clicked="LoginButton_Clicked"
+                    BackgroundColor="#52a8e5"
+                    TextColor="#eaf2ff"
+                    HeightRequest="42"
+                    Margin="2"/>
             </StackLayout>
-            <StackLayout VerticalOptions="Center">
+                <StackLayout VerticalOptions="Center" WidthRequest="280">
                 <Button Text="Lapsen näkymä"
-                Clicked="ChildrensView" />
+                Clicked="ChildrensView"
+                BackgroundColor="#52a8e5"
+                TextColor="#eaf2ff"
+                HeightRequest="42"
+                Margin="2"/>
 
                 <Button Text="Vanhemman näkymä"
-                Clicked="ParentsView" />
+                Clicked="ParentsView"
+                BackgroundColor="#52a8e5"
+                TextColor="#eaf2ff"
+                HeightRequest="42"
+                Margin="2"/>
 
                 <Button Text="Balanssi"
-                Clicked="BalanceView" />
+                Clicked="BalanceView"
+                BackgroundColor="#52a8e5"
+                TextColor="#eaf2ff"
+                HeightRequest="42"
+                Margin="2"/>
 
-            <Button Text="Kartta"
-                Clicked="MapView" />
+                <Button Text="Kartta"
+                Clicked="MapView" Margin="2,2,2,15"
+                BackgroundColor="#52a8e5"
+                TextColor="#eaf2ff"
+                HeightRequest="42"
+                />
             </StackLayout>
 
             <StackLayout VerticalOptions="End">
 
-                    <ContentView Padding="0,25,0,0">
-                        <Label Text="Lapsen sähköposti:" />
-                    </ContentView>
+
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Label x:Name="ChildrensEmailLabelFront" Text="Lapsen sähköposti: Ei syötetty" />
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Label x:Name="ChildrensEmailLabel"/>
+                        </StackLayout>
+                    </StackLayout>
 
                     <Entry x:Name="childrensEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
 
                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                            <Button x:Name="ChildrensToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ChildrensEmailToLabel_Clicked"/>
-                            <Label x:Name="ChildrensEmailLabel"/>
+                            <Button x:Name="ChildrensToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ChildrensEmailToLabel_Clicked" 
+                                    BackgroundColor="#52a8e5" TextColor="#eaf2ff" WidthRequest="18" HeightRequest="40"/>
                         </StackLayout>
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                            <Button x:Name="ClearEmailLabel" FontSize="12" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked"/>
+                            <Button x:Name="ClearEmailLabel" FontSize="14" Text="Poista sähköposti" Clicked="ClearEmailLabel_Clicked" 
+                                    BackgroundColor="#52a8e5" TextColor="#eaf2ff" HeightRequest="40"/>
                         </StackLayout>
                     </StackLayout>
 
-
-                    <Label Text="Vanhemman sähköposti:"/>
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Label x:Name="ParentsEmailLabelFront" Text="Vanhemman sähköposti: Ei syötetty"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                            <Label x:Name="ParentsEmailLabel"/>
+                        </StackLayout>
+                    </StackLayout>
+                                                     
                     <Entry x:Name="parentsEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
                                                          
                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                            <Button x:Name="ParentsEmailToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ParentsEmailToLabel_Clicked"/>
-                            <Label x:Name="ParentsEmailLabel"/>
+                            <Button x:Name="ParentsEmailToLabel" FontSize="20" FontAttributes="Bold" Text="+" Clicked="ParentsEmailToLabel_Clicked" 
+                                    BackgroundColor="#52a8e5" TextColor="#eaf2ff" WidthRequest="18" HeightRequest="40"/>
                         </StackLayout>
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                            <Button x:Name="ClearParentsEmailLabel" FontSize="12" Text="Poista sähköposti" Clicked="ClearParentsEmailLabel_Clicked"/>
+                            <Button x:Name="ClearParentsEmailLabel" FontSize="14" Text="Poista sähköposti" Clicked="ClearParentsEmailLabel_Clicked" 
+                                    BackgroundColor="#52a8e5" TextColor="#eaf2ff" HeightRequest="40"/>
                         </StackLayout>
                     </StackLayout>
 

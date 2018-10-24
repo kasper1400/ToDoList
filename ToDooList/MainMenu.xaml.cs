@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -33,16 +34,47 @@ namespace ToDooList
             
         }
 
+
+
+
         private void ChildrensEmailToLabel_Clicked(object sender, EventArgs e)
         {
-            ChildrensEmailLabel.Text = childrensEmailInput.Text;
-            childrensEmail = ChildrensEmailLabel.Text;
+            var emailValid = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+
+            if (!String.IsNullOrWhiteSpace(childrensEmailInput.Text) && !(Regex.IsMatch(childrensEmailInput.Text, emailValid)))
+            {
+                DisplayAlert("Invalid Email", "Ei voitu validoia. Tarkista syöttämäsi sähköpostiosoite", "ok");
+            }
+            else if (childrensEmailInput.Text == null)
+            {
+                DisplayAlert("Invalid Email", "Ei voitu validoia. Tarkista syöttämäsi sähköpostiosoite", "ok");
+            }
+            else
+            {
+                ChildrensEmailLabel.Text = childrensEmailInput.Text;
+                childrensEmail = ChildrensEmailLabel.Text;
+                ChildrensEmailLabelFront.Text = "Lapsen s.posti: ";
+            }
         }
 
         private void ParentsEmailToLabel_Clicked(object sender, EventArgs e)
         {
-           ParentsEmailLabel.Text = parentsEmailInput.Text;
-           parentsEmail = ParentsEmailLabel.Text;
+            var emailValid = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
+
+            if (!String.IsNullOrWhiteSpace(parentsEmailInput.Text) && !(Regex.IsMatch(parentsEmailInput.Text, emailValid)))
+            {
+                DisplayAlert("Invalid Email", "Ei voitu validoia. Tarkista syöttämäsi sähköpostiosoite", "ok");
+            }
+            else if (parentsEmailInput.Text == null)
+            {
+                DisplayAlert("Invalid Email", "Ei voitu validoia. Tarkista syöttämäsi sähköpostiosoite", "ok");
+            }
+            else
+            {
+                ParentsEmailLabel.Text = parentsEmailInput.Text;
+                parentsEmail = ParentsEmailLabel.Text;
+                ParentsEmailLabelFront.Text = "Vanhemman s.posti: ";
+            }
         }
 
         private void ClearEmailLabel_Clicked(object sender, EventArgs e)

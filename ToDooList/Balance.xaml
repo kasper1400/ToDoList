@@ -23,9 +23,9 @@
                 </Grid.ColumnDefinitions>
                 <Label x:Name="balanceLabel" TextColor="#ffffff" Text="€" Grid.Row="0" Grid.Column="0" />
 
-                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
-                    
-                    <Button Text="Lähetä sähköposti" Clicked="SendEmail_Clicked" />
+                <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
+
+                    <Button Text="Lähetä sähköposti" Clicked="SendEmail_Clicked" FontSize="14" TextColor="#eaf2ff" />
                 </StackLayout>
             </Grid>
         </StackLayout>

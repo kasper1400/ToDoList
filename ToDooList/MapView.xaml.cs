@@ -23,7 +23,7 @@ namespace ToDooList
 
         public MapView (string childrensEmail, string parentsEmail)
 		{
-			//InitializeComponent ();
+			InitializeComponent ();
 
             this.parentsEmail = parentsEmail;
             this.childrensEmail = childrensEmail;
@@ -50,7 +50,7 @@ namespace ToDooList
         async Task GetLocations(Map map)
         {
             IEnumerable<TodoItem> items = await todoTable
-            .Where(todoItem => todoItem.ParentsEmail == parentsEmail)
+            .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete)
             .ToEnumerableAsync();
 
             foreach (TodoItem item in items)

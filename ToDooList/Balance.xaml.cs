@@ -75,7 +75,7 @@ namespace ToDooList
             }
             balanceLabel.Text = "Balanssi: " + prices.ToString() + "€";
         }
-
+        
         protected override async void OnAppearing()
         {
             base.OnAppearing();

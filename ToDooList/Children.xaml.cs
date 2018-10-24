@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Xamarin.Forms;
 using System.Collections;
+using Plugin.Geolocator.Abstractions;
+using Plugin.Geolocator;
+using System.Threading;
 
 namespace ToDooList
 {
@@ -56,6 +59,7 @@ namespace ToDooList
             }
         }
 
+
         //Data methods
         async Task AddItem(TodoItem item)
         {
@@ -63,8 +67,16 @@ namespace ToDooList
             todoList.ItemsSource = await GetTodoItemsAsyncChildrensView();
         }
 
-        async Task CompleteItem(TodoItem item)
+       
+
+    async Task CompleteItem(TodoItem item)
         {
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
+ 
+            item.Latitude = position.Latitude;
+            item.Longitude = position.Longitude;
+  
             item.TaskReady = true;
             item.ChildrensEmail = childrensEmail;
 
@@ -76,7 +88,6 @@ namespace ToDooList
         {
             try
             {
-
                 IEnumerable<TodoItem> items = await todoTable
                     .Where(todoItem => todoItem.ParentsEmail == parentsEmail)
                     .ToEnumerableAsync();
@@ -118,16 +129,14 @@ namespace ToDooList
             // prevents background getting highlighted
             todoList.SelectedItem = null;
         }
-
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#context
+ 
         public async void OnComplete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
             var todo = mi.CommandParameter as TodoItem;
             await CompleteItem(todo);
         }
-
-        // http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/listview/#pulltorefresh
+ 
         public async void OnRefresh(object sender, EventArgs e)
         {
             var list = (ListView)sender;

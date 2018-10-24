@@ -15,6 +15,7 @@ using Xamarin.Forms.Platform.Android;
 using System.Threading.Tasks;
 using Android;
 using Android.Support.Design.Widget;
+using Plugin.CurrentActivity;
 
 namespace ToDooList.Droid
 {
@@ -44,6 +45,9 @@ namespace ToDooList.Droid
 
             // Initialize Xamarin Maps
             Xamarin.FormsMaps.Init(this, bundle);
+
+            // Initialize Geolocator plugin
+            CrossCurrentActivity.Current.Init(this, bundle);
 
             // Load the main application
             LoadApplication(new App ());

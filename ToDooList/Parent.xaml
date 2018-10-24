@@ -15,7 +15,7 @@
                        IsEnabled="True"
                        x:Name="syncIndicator"/>
     <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
-            <Label TextColor="#ffffff" Text="ToDoList" />
+            <Label TextColor="#ffffff" Text="Vanhemman näkymä" />
             <Button Text="Balanssi ->" Clicked="BalanceView" HorizontalOptions="End" TextColor="#eaf2ff"/>
             <Grid>
         <Grid.ColumnDefinitions>

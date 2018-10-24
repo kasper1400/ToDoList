@@ -14,6 +14,9 @@ namespace ToDooList
         bool taskready;
         bool done;
         bool softdelete;
+        double longitude;
+        double latitude;
+
 
         [JsonProperty(PropertyName = "id")]
 		public string Id
@@ -69,6 +72,20 @@ namespace ToDooList
         {
             get { return done; }
             set { done = value; }
+        }
+
+        [JsonProperty(PropertyName = "Longitude")]
+        public double Longitude
+        {
+            get { return longitude; }
+            set { longitude = value; }
+        }
+
+        [JsonProperty(PropertyName = "Latitude")]
+        public double Latitude
+        {
+            get { return latitude; }
+            set { latitude = value; }
         }
 
         [Version]

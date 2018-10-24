@@ -109,8 +109,9 @@ namespace ToDooList
 
                 newItemName.Text = string.Empty;
                 newItemName.Unfocus();
-                //newItemPrice.Text = string.Empty;
-                //newItemPrice.Unfocus();
+
+                newItemPrice.Text = string.Empty;
+                newItemPrice.Unfocus();
             }
             catch
             {

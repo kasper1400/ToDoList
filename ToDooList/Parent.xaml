@@ -16,7 +16,7 @@
                        x:Name="syncIndicator"/>
     <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
             <Label TextColor="#ffffff" Text="ToDoList" />
-            <Button Text="Balanssi ->" Clicked="BalanceView" HorizontalOptions="End"/>
+            <Button Text="Balanssi ->" Clicked="BalanceView" HorizontalOptions="End" TextColor="#eaf2ff"/>
             <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition/>
@@ -26,19 +26,20 @@
                 
                 <Label TextColor="#ffffff" Text="Kotityö" Grid.Row="0" Grid.Column="0"/>
                 
-                <Entry x:Name="newItemName" PlaceholderColor="#D3D3D3" Grid.Column="0" Grid.Row="0" FontSize="8" 
-                  Placeholder="..." />
+                <Entry x:Name="newItemName" PlaceholderColor="#D3D3D3" Grid.Column="0" Grid.Row="0" FontSize="15" 
+                  Placeholder="..." Margin="0,15,0,0" />
 
                 <Label TextColor="#ffffff" Text="Hinta" Grid.Column="2" Grid.Row="0"/>
                 
-                <Entry x:Name="newItemPrice" PlaceholderColor="#D3D3D3" Grid.Column="2" Grid.Row="0" FontSize="8"
-                  Placeholder=".." />
+                <Entry x:Name="newItemPrice" PlaceholderColor="#D3D3D3" Grid.Column="2" Grid.Row="0" FontSize="15"
+                  Placeholder=".." Keyboard="Numeric" Margin="0,15,0,0" />
 
                 <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
                     <Button Text="+"
                   WidthRequest="40"
                   HeightRequest="40"
-                  Clicked="OnAdd"/>
+                  Clicked="OnAdd"
+                  TextColor="#eaf2ff"/>
                 </StackLayout>
       </Grid>
     </StackLayout>
@@ -52,7 +53,7 @@
             <ViewCell.ContextActions>
               <MenuItem Clicked="OnComplete" Text="Kuittaa kotityö" CommandParameter="{Binding .}"/>
             </ViewCell.ContextActions>
-            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,5,0,0">
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,10,0,0">
                             <ScrollView>
                 <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
                        <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>

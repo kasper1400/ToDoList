@@ -28,6 +28,7 @@ namespace ToDooList
 
         TodoItemManager manager;
 
+
         public Parent(string childrensEmail, string parentsEmail)
         {
             InitializeComponent();
@@ -99,15 +100,24 @@ namespace ToDooList
         }
 
         public async void OnAdd(object sender, EventArgs e)
-        {           
-            var todo = new TodoItem { Task = newItemName.Text, Price = Convert.ToInt32(newItemPrice.Text), ParentsEmail = parentsEmail };
-            await AddItem(todo);
+        {
 
-            newItemName.Text = string.Empty;
-            newItemName.Unfocus();
+            try
+            {
+                var todo = new TodoItem { Task = newItemName.Text, Price = Convert.ToInt32(newItemPrice.Text), ParentsEmail = parentsEmail };
+                await AddItem(todo);
 
-            //newItemPrice.Text = string.Empty;
-            //newItemPrice.Unfocus();
+                newItemName.Text = string.Empty;
+                newItemName.Unfocus();
+                //newItemPrice.Text = string.Empty;
+                //newItemPrice.Unfocus();
+            }
+            catch
+            {
+                await DisplayAlert("Ei voitu lisätä", "Käytä hinnassa vain numeroita", "OK");
+            }
+
+
         }
 
         // Event handlers

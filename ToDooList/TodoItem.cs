@@ -11,6 +11,7 @@ namespace ToDooList
         string price;
         string childrensEmail;
         string parentsEmail;
+        string i_imageSource;
         bool taskready;
         bool done;
         bool softdelete;
@@ -69,6 +70,13 @@ namespace ToDooList
         {
             get { return done; }
             set { done = value; }
+        }
+
+        [JsonProperty(PropertyName = "imageSource")]
+        public string imageSource
+        {
+            get { return i_imageSource; }
+            set { i_imageSource = value; }
         }
 
         [Version]

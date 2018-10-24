@@ -46,7 +46,7 @@
                                 <Label Text="{Binding Task}"/>
                                 <Label Text="{Binding Price}"/>
                                 <Label Text="{Binding ParentsEmail}"/>
-                                <Label Text="{Binding TaskReady}"/>
+                                <Image Source="{Binding imageSource}" />
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

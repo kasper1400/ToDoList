@@ -81,7 +81,21 @@ namespace ToDooList
                     .Where(todoItem => todoItem.ParentsEmail == parentsEmail)
                     .ToEnumerableAsync();
 
-                return new ObservableCollection<TodoItem>(items);
+                List<TodoItem> newItems = new List<TodoItem>();
+                foreach (TodoItem modifytodoItem in items)
+                {
+                    if (modifytodoItem.TaskReady)
+                    {
+                        modifytodoItem.imageSource = "checkmark.png";
+                    }
+                    else
+                    {
+                        modifytodoItem.imageSource = "rasti.png";
+                    }
+                    newItems.Add(modifytodoItem);
+                }
+
+                return new ObservableCollection<TodoItem>(newItems);
             }
             catch (MobileServiceInvalidOperationException msioe)
             {

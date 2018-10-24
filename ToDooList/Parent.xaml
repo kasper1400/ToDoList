@@ -59,10 +59,10 @@
                        <Label Text="{Binding Task}"/>
                        <Label Text="{Binding Price}"/>
                        <Label Text="{Binding ChildrensEmail}"/>
-                       <Label Text="{Binding TaskReady}"/>
-                                </StackLayout>
-                            </ScrollView>
-                        </StackLayout>
+                       <Image Source="{Binding imageSource}" />
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>

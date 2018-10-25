@@ -61,10 +61,10 @@
                        <Label FontSize="16" Text="{Binding Task}"/>
                        <Label FontSize="16" Text="{Binding Price}"/>
                        <Label FontSize="16" Text="{Binding ChildrensEmail}"/>
-                       <Label FontSize="16" Text="{Binding TaskReady}"/>
-                                </StackLayout>
-                            </ScrollView>
-                        </StackLayout>
+                        <Image Source="{Binding imageSource}" />
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>

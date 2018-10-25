@@ -13,6 +13,7 @@ namespace ToDooList
         string parentsEmail;
         bool taskready;
         bool done;
+        string i_imageSource;
         bool softdelete;
         double longitude;
         double latitude;
@@ -86,6 +87,12 @@ namespace ToDooList
         {
             get { return latitude; }
             set { latitude = value; }
+        }
+        [JsonProperty(PropertyName = "imageSource")]
+        public string imageSource
+        {
+            get { return i_imageSource; }
+            set { i_imageSource = value; }
         }
 
         [Version]

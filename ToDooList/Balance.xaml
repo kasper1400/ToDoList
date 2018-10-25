@@ -16,16 +16,14 @@
                        IsEnabled="True"
                        x:Name="syncIndicator"/>
         <StackLayout Grid.Row="0" BackgroundColor="#5ABAFF" Padding="10,30,10,5">
-            <Label TextColor="#ffffff" Text="Valmistuneet kotityöt ja balanssi" FontSize="18" />
+            <Label TextColor="#ffffff" Text="Valmistuneet kotityöt" FontSize="18" />
+            <Label x:Name="balanceLabel" TextColor="#ffffff" Text="€" FontSize="16" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label x:Name="balanceLabel" TextColor="#ffffff" Text="€" Grid.Row="0" Grid.Column="0" FontSize="16" />
-
                 <StackLayout x:Name="buttonsPanel" Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="End">
-
                     <Button Text="Lähetä sähköposti" Clicked="SendEmail_Clicked" FontSize="14" TextColor="#eaf2ff" />
                 </StackLayout>
             </Grid>
@@ -45,8 +43,9 @@
                                 <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
                                     <Label FontSize="16" Text="{Binding Task}"/>
                                     <Label FontSize="16" Text="{Binding Price}"/>
-                                    <Label FontSize="16" Text="{Binding ParentsEmail}"/>
+                                    <Label FontSize="16" Text="{Binding ChildrensEmail}"/>
                                     <Label FontSize="16" Text="{Binding Done}"/>
+                                    <Image Source="{Binding imageSource}" />
                                 </StackLayout>
                             </ScrollView>
                         </StackLayout>

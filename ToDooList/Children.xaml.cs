@@ -59,6 +59,10 @@ namespace ToDooList
             }
         }
 
+        private void BalanceView(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Balance(childrensEmail, parentsEmail));
+        }
 
         //Data methods
         async Task AddItem(TodoItem item)
@@ -230,11 +234,6 @@ namespace ToDooList
             }
 
            
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
         }
     }
 }

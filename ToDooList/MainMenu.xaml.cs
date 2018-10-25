@@ -34,9 +34,6 @@ namespace ToDooList
             
         }
 
-
-
-
         private void ChildrensEmailToLabel_Clicked(object sender, EventArgs e)
         {
             var emailValid = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
@@ -93,7 +90,6 @@ namespace ToDooList
 
         private void ParentsView(object sender, EventArgs e)
         {
-
             if (ParentsEmailLabel.Text == null)
             {
                 DisplayAlert("Pääsy estetty", "Täytä vanhemman sähköposti", "OK");
@@ -107,7 +103,6 @@ namespace ToDooList
                 DisplayAlert("Pääsy estetty", "Tunnistaudu ensin!", "OK");
             }
         }
-
 
         private void ChildrensView(object sender, EventArgs e)
         {
@@ -125,17 +120,29 @@ namespace ToDooList
             {
                 DisplayAlert("Pääsy estetty", "Tunnistaudu ensin", "OK");
             }
-
         }
 
         private void BalanceView(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Balance(childrensEmail, parentsEmail));
+            if (ChildrensEmailLabel.Text == null)
+            {
+                DisplayAlert("Pääsy estetty", "Täytä lapsen sähköposti!", "OK");
+            }
+            else{
+                Navigation.PushAsync(new Balance(childrensEmail, parentsEmail));
+            }           
         }
 
         private void MapView(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MapView(childrensEmail, parentsEmail));
+            if (ParentsEmailLabel.Text == null)
+            {
+                DisplayAlert("Pääsy estetty", "Täytä vanhemman sähköposti!", "OK");
+            }
+            else
+            {
+                Navigation.PushAsync(new MapView(childrensEmail, parentsEmail));
+            }
         }
 
         async void LoginButton_Clicked(object sender, EventArgs e)

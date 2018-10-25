@@ -57,7 +57,6 @@
             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="15,10,0,0">
                             <ScrollView>
                 <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                       <Button Text="" Clicked="Button_Clicked" WidthRequest="20" HeightRequest="5"/>
                        <Label FontSize="16" Text="{Binding Task}"/>
                        <Label FontSize="16" Text="{Binding Price}"/>
                        <Label FontSize="16" Text="{Binding ChildrensEmail}"/>

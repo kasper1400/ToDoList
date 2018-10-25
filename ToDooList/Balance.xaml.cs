@@ -66,14 +66,14 @@ namespace ToDooList
         async Task GetPrices(int prices)
         {
             IEnumerable<TodoItem> items = await todoTable
-            .Where(todoItem => todoItem.ParentsEmail == parentsEmail && todoItem.Done == true && !todoItem.SoftDelete)
+            .Where(todoItem => todoItem.ChildrensEmail == childrensEmail && todoItem.Done == true && !todoItem.SoftDelete)
             .ToEnumerableAsync();
 
             foreach (TodoItem item in items)
             {
                 prices += item.Price;
             }
-            balanceLabel.Text = "Balanssi: " + prices.ToString() + "€";
+            balanceLabel.Text = "Tilin " + childrensEmail + " balanssi: " + prices.ToString() + "€";
         }
         
         protected override async void OnAppearing()
@@ -95,8 +95,7 @@ namespace ToDooList
                 await GetPrices(prices);
             }
         }
-        
-
+ 
         // Data methods
         async Task DeleteItem(TodoItem item)
         {
@@ -106,16 +105,30 @@ namespace ToDooList
             await GetPrices(prices);
         }
 
-
         public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsyncBalanceView(bool syncItems = false)
         {
             try
             {
 
                 IEnumerable<TodoItem> items = await todoTable
-                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && todoItem.Done == true && !todoItem.SoftDelete )
+                    .Where(todoItem => todoItem.ChildrensEmail == childrensEmail && todoItem.TaskReady == true && todoItem.Done == true && !todoItem.SoftDelete )
                     .ToEnumerableAsync();
-                return new ObservableCollection<TodoItem>(items);
+
+                List<TodoItem> newItems = new List<TodoItem>();
+                foreach (TodoItem modifytodoItem in items)
+                {
+                    if (modifytodoItem.Done)
+                    {
+                        modifytodoItem.imageSource = "checkmark.png";
+                    }
+                    else
+                    {
+                        modifytodoItem.imageSource = "rasti.png";
+                    }
+                    newItems.Add(modifytodoItem);
+                }
+
+                return new ObservableCollection<TodoItem>(newItems);
 
             }
             catch (MobileServiceInvalidOperationException msioe)

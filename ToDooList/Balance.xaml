@@ -44,7 +44,6 @@
                                     <Label FontSize="16" Text="{Binding Task}"/>
                                     <Label FontSize="16" Text="{Binding Price}"/>
                                     <Label FontSize="16" Text="{Binding ChildrensEmail}"/>
-                                    <Label FontSize="16" Text="{Binding Done}"/>
                                     <Image Source="{Binding imageSource}" />
                                 </StackLayout>
                             </ScrollView>

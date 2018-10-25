@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDooList.MainMenu">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="#ABD8F7">
             <StackLayout HorizontalOptions="Center">
             <StackLayout VerticalOptions="Start">
                     <ContentView Padding="0,25,0,5">
@@ -58,7 +58,7 @@
                         </StackLayout>
                     </StackLayout>
 
-                    <Entry x:Name="childrensEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
+                    <Entry x:Name="childrensEmailInput" PlaceholderColor="#545454" FontSize="15" Placeholder="Syötä lapsen sähköposti" Grid.Column="0" Grid.Row="0"/>
 
                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
@@ -79,8 +79,8 @@
                             <Label x:Name="ParentsEmailLabel"/>
                         </StackLayout>
                     </StackLayout>
-                                                     
-                    <Entry x:Name="parentsEmailInput" PlaceholderColor="#D3D3D3" FontSize="15" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
+
+                    <Entry x:Name="parentsEmailInput" PlaceholderColor="#545454" FontSize="15" Placeholder="Syötä vanhemman sähköposti" Grid.Column="0" Grid.Row="0"/>
                                                          
                     <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">

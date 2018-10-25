@@ -54,6 +54,7 @@ namespace ToDooList
                 ChildrensEmailLabel.Text = childrensEmailInput.Text;
                 childrensEmail = ChildrensEmailLabel.Text;
                 ChildrensEmailLabelFront.Text = "Lapsen s.posti: ";
+                ChildrensToLabel.IsVisible = false;
             }
         }
 
@@ -74,17 +75,20 @@ namespace ToDooList
                 ParentsEmailLabel.Text = parentsEmailInput.Text;
                 parentsEmail = ParentsEmailLabel.Text;
                 ParentsEmailLabelFront.Text = "Vanhemman s.posti: ";
+                ParentsEmailToLabel.IsVisible = false;
             }
         }
 
         private void ClearEmailLabel_Clicked(object sender, EventArgs e)
         {
             ChildrensEmailLabel.Text = null;
+            ChildrensToLabel.IsVisible = true;
         }
 
         private void ClearParentsEmailLabel_Clicked(object sender, EventArgs e)
         {
             ParentsEmailLabel.Text = null;
+            ParentsEmailToLabel.IsVisible = true;
         }
 
         private void ParentsView(object sender, EventArgs e)

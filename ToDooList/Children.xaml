@@ -40,6 +40,7 @@
                             <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
                                 <Label FontSize="16" Text="{Binding Task}"/>
                                 <Label FontSize="16" Text="{Binding Price}"/>
+                                <Label FontSize="16" Text="{Binding ChildrensEmail}"/>
                                 <Image Source="{Binding imageSource}" />
                             </StackLayout>
                         </StackLayout>

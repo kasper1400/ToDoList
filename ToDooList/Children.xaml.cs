@@ -93,7 +93,7 @@ namespace ToDooList
             try
             {
                 IEnumerable<TodoItem> items = await todoTable
-                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail)
+                    .Where(todoItem => todoItem.ParentsEmail == parentsEmail && !todoItem.SoftDelete)
                     .ToEnumerableAsync();
 
                 List<TodoItem> newItems = new List<TodoItem>();
